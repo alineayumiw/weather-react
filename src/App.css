@@ -1,38 +1,119 @@
-.App {
+.weather-app {
+  max-width: 80%;
+  margin: 30px auto;
+  border: 1px solid #dadde1;
+  border-radius: 10px;
+  background-color: #fdfdfd;
+}
+
+#form {
+  border-radius: 10px;
+  width: max-content;
+  margin-top: 50px;
+}
+
+.cardstyle {
+  position: relative;
+  left: 500px;
+  top: 50px;
+}
+
+#city {
+  font-weight: bold;
+}
+
+p,
+h5 {
+  margin-top: 10px;
+  margin-bottom: -10px;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#temperature {
+  font-size: 25px;
+  text-align: center;
+}
+.units {
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+}
+nav {
+  position: relative;
+  top: -180px;
+  left: 30px;
+}
+
+.weather-forecast {
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.forecast-date {
+  font-size: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.forecast-temperatures {
+  font-size: 13px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.forecast-temperature-min {
+  opacity: 0.6;
+}
+
+h6 {
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+#current-position {
+  margin-left: 5px;
+}
+
+.link {
+  display: block;
+  text-align: center;
+}
+.card-body {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
+}
+#f-link {
+  text-decoration: none;
+}
+#c-link {
+  text-decoration: none;
+}
+.units .active {
+  text-decoration: none;
+  color: black;
+  cursor: default;
 }
 
-.App-link {
-  color: #61dafb;
+.units .active:hover {
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+ul {
+  margin: -10px;
+  padding: 12px;
+}
+
+li {
+  list-style: none;
+  font-size: 10px;
+}
+
+#description {
+  margin: 10px 0 0 0;
+}
+
+#hours {
+  margin: 0 auto;
+}
+
+#date {
+  margin: 0 auto;
 }
