@@ -89,7 +89,7 @@ export default function App() {
         </div>
       </div>{" "}
       <p className="source">
-        <a href="https://github.com/alineayumiw/weather-react">
+        <a href="https://github.com/alineayumiw/weather-react" target="_blank">
           Open-source code
         </a>{" "}
         by Aline Watanabe
