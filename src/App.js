@@ -87,7 +87,13 @@ export default function App() {
           </div>
           <div className="weather-forecast" id="forecast"></div>
         </div>
-      </div>
+      </div>{" "}
+      <p className="source">
+        <a href="https://github.com/alineayumiw/weather-react">
+          Open-source code
+        </a>{" "}
+        by Aline Watanabe
+      </p>
     </div>
   );
 }
