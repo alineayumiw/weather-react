@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 import WeatherIcon from "./WeatherIcon";
+import WeatherTemperature from "./WeatherTemperature";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 export default function App() {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -67,20 +69,14 @@ export default function App() {
                           <h5 className="card-title" id="city">
                             {weatherData.city}
                           </h5>
+
                           <div>
                             <strong className="card-text" id="temperature">
                               {" "}
-                              {Math.round(weatherData.temperature)}
+                              <WeatherTemperature
+                                celsius={weatherData.temperature}
+                              />
                             </strong>
-                            <span className="units">
-                              <a href="#" id="c-link" className="active">
-                                °C
-                              </a>
-                              |
-                              <a href="#" id="f-link">
-                                °F
-                              </a>
-                            </span>
                           </div>
                           <p id="description" className="text-capitalize">
                             {weatherData.description}
