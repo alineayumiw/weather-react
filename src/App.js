@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FormattedDate from "./FormattedDate";
 import axios from "axios";
 import "./App.css";
 
@@ -6,16 +7,14 @@ export default function App() {
   const [weatherData, setWeatherData] = useState({ ready: false });
 
   function handleResponse(response) {
-    console.log(response.data);
     setWeatherData({
       ready: true,
+      date: new Date(response.data.dt * 1000),
       temperature: response.data.main.temp,
       city: response.data.name,
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
-      time: "Saturday 9:00am",
-      date: "26/5/2022",
     });
   }
 
@@ -74,8 +73,10 @@ export default function App() {
                           <p id="description" className="text-capitalize">
                             {weatherData.description}
                           </p>
-                          <p id="hours"> {weatherData.time}</p>
-                          <p id="date">{weatherData.date}</p>
+                          <p id="hours"> </p>
+                          <div id="date">
+                            <FormattedDate date={weatherData.date} />
+                          </div>
                         </div>
                       </div>
                     </div>
