@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import FormattedDate from "./FormattedDate";
 import axios from "axios";
 import "./App.css";
+import WeatherIcon from "./WeatherIcon";
 
 export default function App() {
   const [weatherData, setWeatherData] = useState({ ready: false });
-
+  const [city, setCity] = useState("Tokyo");
   function handleResponse(response) {
     setWeatherData({
       ready: true,
@@ -15,7 +15,23 @@ export default function App() {
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
+      icon: response.data.weather[0].icon,
     });
+  }
+
+  function search() {
+    const apiKey = "423fc825af3a486561521bdd3136568e";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
   }
 
   if (weatherData.ready) {
@@ -29,11 +45,7 @@ export default function App() {
                   <div className="card mb-3">
                     <div className="row g-0">
                       <div className="col-md-4">
-                        <img
-                          src={weatherData.iconUrl}
-                          alt={weatherData.description}
-                          className="icon"
-                        />
+                        <WeatherIcon className="icon" code={weatherData.icon} />
                         <ul>
                           <li>
                             <span className="wind-speed">
@@ -74,23 +86,29 @@ export default function App() {
                             {weatherData.description}
                           </p>
                           <p id="hours"> </p>
-                          <div id="date">
-                            <FormattedDate date={weatherData.date} />
-                          </div>
+                          <div id="date"></div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
                 <nav className="navbar bg-light" id="form">
                   <div className="container-fluid">
-                    <form className="d-flex" role="search" id="search-form">
+                    <form
+                      className="d-flex"
+                      role="search"
+                      id="search-form"
+                      onSubmit={handleSubmit}
+                    >
                       <input
                         className="form-control me-2"
                         type="search"
                         placeholder="Select your city"
                         id="search-input"
+                        onChange={handleCityChange}
                       />
+
                       <button className="btn btn-outline-success" type="submit">
                         Search
                       </button>
@@ -106,9 +124,9 @@ export default function App() {
                 </nav>
               </div>
             </div>
-            <div className="weather-forecast" id="forecast"></div>
-          </div>
-        </div>{" "}
+          </div>{" "}
+        </div>
+
         <p className="source">
           <a
             href="https://github.com/alineayumiw/weather-react"
@@ -121,11 +139,7 @@ export default function App() {
       </div>
     );
   } else {
-    const apiKey = "423fc825af3a486561521bdd3136568e";
-    let city = "Tokyo";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
+    search();
+    return "Loading..";
   }
-
-  return "Loading..";
 }
