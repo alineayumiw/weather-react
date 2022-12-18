@@ -14,7 +14,7 @@
 
 .cardstyle {
   position: relative;
-  left: 500px;
+  left: 530px;
   top: 50px;
 }
 
@@ -34,9 +34,12 @@ h5 {
   font-size: 25px;
   text-align: center;
 }
-.units {
+.unit {
   font-family: "Courier New", Courier, monospace;
   text-align: center;
+  font-size: small;
+  position: relative;
+  top: -10px;
 }
 nav {
   position: relative;
@@ -80,21 +83,6 @@ h6 {
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
-}
-#f-link {
-  text-decoration: none;
-}
-#c-link {
-  text-decoration: none;
-}
-.units .active {
-  text-decoration: none;
-  color: black;
-  cursor: default;
-}
-
-.units .active:hover {
-  text-decoration: none;
 }
 
 ul {

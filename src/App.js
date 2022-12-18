@@ -1,29 +1,31 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
-import WeatherIcon from "./WeatherIcon";
 import WeatherTemperature from "./WeatherTemperature";
-import { propTypes } from "react-bootstrap/esm/Image";
+import WeatherForecast from "./WeatherForecast";
+import FormattedDate from "./FormattedDate";
 
 export default function App() {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState("Tokyo");
   function handleResponse(response) {
+    console.log(response.data);
     setWeatherData({
       ready: true,
-      date: new Date(response.data.dt * 1000),
-      temperature: response.data.main.temp,
-      city: response.data.name,
+      coordinates: response.data.coordinates,
+      date: new Date(response.data.time * 1000),
+      temperature: response.data.temperature.current,
+      city: response.data.city,
       wind: response.data.wind.speed,
-      humidity: response.data.main.humidity,
-      description: response.data.weather[0].description,
-      icon: response.data.weather[0].icon,
+      humidity: response.data.temperature.humidity,
+      description: response.data.condition.description,
+      icon: `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
     });
   }
 
   function search() {
-    const apiKey = "423fc825af3a486561521bdd3136568e";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const apiKey = "133a3ft3fab6094b0b7471o16009a6a4";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
   }
 
@@ -47,7 +49,9 @@ export default function App() {
                   <div className="card mb-3">
                     <div className="row g-0">
                       <div className="col-md-4">
-                        <WeatherIcon className="icon" code={weatherData.icon} />
+                        <div className="icon">
+                          <img src={weatherData.icon} />
+                        </div>
                         <ul>
                           <li>
                             <span className="wind-speed">
@@ -82,7 +86,9 @@ export default function App() {
                             {weatherData.description}
                           </p>
                           <p id="hours"> </p>
-                          <div id="date"></div>
+                          <div id="date">
+                            <FormattedDate date={weatherData.date} />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -118,20 +124,20 @@ export default function App() {
                     </form>
                   </div>
                 </nav>
-              </div>
+              </div>{" "}
+              <WeatherForecast coordinates={weatherData.coordinates} />
             </div>
           </div>{" "}
+          <p className="source">
+            <a
+              href="https://github.com/alineayumiw/weather-react"
+              target="_blank"
+            >
+              Open-source code
+            </a>{" "}
+            by Aline Watanabe
+          </p>
         </div>
-
-        <p className="source">
-          <a
-            href="https://github.com/alineayumiw/weather-react"
-            target="_blank"
-          >
-            Open-source code
-          </a>{" "}
-          by Aline Watanabe
-        </p>
       </div>
     );
   } else {
