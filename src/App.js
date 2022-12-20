@@ -114,13 +114,6 @@ export default function App() {
                       <button className="btn btn-outline-success" type="submit">
                         Search
                       </button>
-                      <button
-                        className="btn btn-outline-primary"
-                        type="submit"
-                        id="current-position"
-                      >
-                        Current
-                      </button>
                     </form>
                   </div>
                 </nav>
